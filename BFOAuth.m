@@ -6,6 +6,15 @@ int BFOAuthUTCTimeOffset = 0;
 NSString *const kBFOAuthGETRequestMethod = @"GET";
 NSString *const kBFOAuthPOSTRequestMethod = @"POST";
 
+NSString *const kBFOAuthConsumerKey = @"oauth_consumer_key";
+NSString *const kBFOAuthNonce       = @"oauth_nonce";
+NSString *const kBFOAuthTimestamp   = @"oauth_timestamp";
+NSString *const kBFOAuthVersion     = @"oauth_version";
+NSString *const kBFOAuthSignatureMethod = @"oauth_signature_method";
+NSString *const kBFOAuthAccessToken = @"oauth_token";
+NSString *const kBFOAuthSignature   = @"oauth_signature";
+
+
 #pragma mark Categories
 
 @implementation NSString (BFOAuth)
@@ -86,12 +95,12 @@ static NSString* timestamp() {
               tokenSecret:(NSString *)tokenSecret
 {
     params = [NSDictionary dictionaryWithObjectsAndKeys:
-              consumerKey,  @"oauth_consumer_key",
-              nonce(),      @"oauth_nonce",
-              timestamp(),  @"oauth_timestamp",
-              @"1.0",       @"oauth_version",
-              @"HMAC-SHA1", @"oauth_signature_method",
-              accessToken,  @"oauth_token",
+              consumerKey,  kBFOAuthConsumerKey,
+              nonce(),      kBFOAuthNonce,
+              timestamp(),  kBFOAuthTimestamp,
+              @"1.0",       kBFOAuthVersion,
+              @"HMAC-SHA1", kBFOAuthSignatureMethod,
+              accessToken,  kBFOAuthAccessToken,
               // LEAVE accessToken last or you'll break XAuth attempts
               nil];
     signatureSecret = [NSString stringWithFormat:@"%@&%@", consumerSecret, tokenSecret ?: @""];
@@ -144,7 +153,7 @@ static NSString* timestamp() {
     [header add:@"OAuth "];
     for (NSString *key in [params allKeys])
         [[[[header add:key] add:@"=\""] add:[params objectForKey:key]] add:@"\", "];
-    [[[header add:@"oauth_signature=\""] add:self.signature.pcen] add:@"\""];
+    [[[header add:[NSString stringWithFormat:@"%@=\"", kBFOAuthSignature]] add:self.signature.pcen] add:@"\""];
     
     return header;
 }
