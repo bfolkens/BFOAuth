@@ -5,6 +5,8 @@ int BFOAuthUTCTimeOffset = 0;
 
 NSString *const kBFOAuthGETRequestMethod = @"GET";
 NSString *const kBFOAuthPOSTRequestMethod = @"POST";
+NSString *const kBFOAuthPUTRequestMethod = @"PUT";
+NSString *const kBFOAuthDELETERequestMethod = @"DELETE";
 
 NSString *const kBFOAuthConsumerKey = @"oauth_consumer_key";
 NSString *const kBFOAuthNonce       = @"oauth_nonce";
