@@ -41,7 +41,7 @@ NSString *const kBFOAuthSignature   = @"oauth_signature";
     return self;
 }
 - (id)chomp {
-    const int N = [self length] - 1;
+    const long N = self.length - 1;
     if (N >= 0)
         [self deleteCharactersInRange:NSMakeRange(N, 1)];
     return self;
