@@ -18,6 +18,7 @@ extern NSString *const kBFOAuthGETRequestMethod;
 extern NSString *const kBFOAuthPOSTRequestMethod;
 extern NSString *const kBFOAuthPUTRequestMethod;
 extern NSString *const kBFOAuthDELETERequestMethod;
+extern NSString *const kBFOAuthPATCHRequestMethod;
 
 - (NSString *)signatureBase;
 - (NSString *)signature;
