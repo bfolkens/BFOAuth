@@ -124,8 +124,10 @@ static NSString* timestamp() {
 {
     NSMutableString *p3 = [NSMutableString stringWithCapacity:256];
     NSArray *keys = [[[self parametersForSignature] allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    for (NSString *key in keys)
-        [[[[p3 add:[key pcen]] add:@"="] add:[[self parametersForSignature] objectForKey:key]] add:@"&"];
+    for (NSString *key in keys) {
+        NSString *value = [[self parametersForSignature] objectForKey:key];
+        [[[[p3 add:[key pcen]] add:@"="] add:[value pcen]] add:@"&"];
+    }
     [p3 chomp];
 
     return [NSString stringWithFormat:@"%@&%@%%3A%%2F%%2F%@%@&%@",
